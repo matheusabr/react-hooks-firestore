@@ -19,6 +19,12 @@ class Firebase {
     this.db = firebase.firestore()
   }
 
+  isInitialized() {
+    return new Promise(resolve => {
+      this.auth.onAuthStateChanged(resolve)
+    })
+  }
+
   async register(name, email, password) {
     await this.auth.createUserWithEmailAndPassword(email, password)
     return this.auth.currentUser.updateProfile({
