@@ -8,9 +8,7 @@ const SignUpPage = ({ history }) => {
       event.preventDefault();
       const { email, password } = event.target.elements;
       try {
-        await fireApp
-          .auth()
-          .createUserWithEmailAndPassword(email.value.toLowerCase(), password.value);
+        await fireApp.register('Teste', email.value.toLowerCase(), password.value)
         history.push('/');
       } catch (error) {
         alert(error);
