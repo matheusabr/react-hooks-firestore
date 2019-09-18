@@ -6,11 +6,9 @@ const SignUpPage = ({ history }) => {
   const handleSignUp = useCallback(
     async event => {
       event.preventDefault();
-      const { email, password } = event.target.elements;
+      const { firstName, lastName, email, password } = event.target.elements;
       try {
-        await fireApp
-          .auth()
-          .createUserWithEmailAndPassword(email.value.toLowerCase(), password.value);
+        await fireApp.register(`${firstName.value} ${lastName.value}`, email.value.toLowerCase(), password.value)
         history.push('/');
       } catch (error) {
         alert(error);
@@ -23,6 +21,26 @@ const SignUpPage = ({ history }) => {
     <div>
       <h1>Sign Up</h1>
       <form onSubmit={handleSignUp}>
+        <label>
+          First Name
+          <input
+            type="text"
+            name="firstName"
+            id="firstName"
+            placeholder="First Name"
+          />
+        </label>
+        <br />
+        <label>
+          Last Name
+          <input
+            type="text"
+            name="lastName"
+            id="lastName"
+            placeholder="Last Name"
+          />
+        </label>
+        <br />
         <label>
           E-mail
           <input

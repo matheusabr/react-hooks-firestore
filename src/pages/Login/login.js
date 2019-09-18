@@ -9,9 +9,7 @@ const LoginPage = ({ history }) => {
       event.preventDefault();
       const { email, password } = event.target.elements;
       try {
-        await fireApp
-          .auth()
-          .signInWithEmailAndPassword(email.value.toLowerCase(), password.value);
+        await fireApp.login(email.value.toLowerCase(), password.value)
         history.push('/');
       } catch (error) {
         alert(error);
